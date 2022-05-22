@@ -21,7 +21,8 @@ import javax.annotation.Resource;
 @Slf4j
 public class OrderController {
 
-    private static final String PAYMENT_URL = "http://localhost:8001";
+//    private static final String PAYMENT_URL = "http://localhost:8001";
+    public static final String PAYMENT_URL = "http://CLOUD-PAYMENT-SERVICE";
 
     @Resource
     private RestTemplate restTemplate;
@@ -29,13 +30,13 @@ public class OrderController {
     //按理说插入数据应该是POST，可以从浏览器只能发GET请求，尽管不符合RESTFUL，
     // 但是下面的template.postForObject调用却是POST请求
     @GetMapping("/consumer/payment/create")
-    public CommonResult create(Payment payment){
+    public CommonResult<Payment> create(Payment payment){
         //调用生产者模块中的生产方法
         return restTemplate.postForObject(PAYMENT_URL+"payment/create", payment, CommonResult.class);
     }
 
     @GetMapping("/consumer/payment/get/{id}")
-    public CommonResult getPayment(@PathVariable("id") Long id){
+    public CommonResult<Payment> getPayment(@PathVariable("id") Long id){
         return restTemplate.getForObject(PAYMENT_URL+"/payment/get/"+id, CommonResult.class);
     }
 
