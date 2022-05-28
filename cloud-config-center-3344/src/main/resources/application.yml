@@ -10,8 +10,8 @@ spring:
       server:
         git:
           uri: https://github.com/r1-12king/springcloud-config.git  #GitHub上面的git仓库名字
-          username: r1-12king
-          password: "@github271828"
+          username:
+          password:
           ####搜索目录
           search-paths:
             - springcloud-config
@@ -24,5 +24,18 @@ eureka:
     service-url:
       defaultZone: http://localhost:7001/eureka
 
+#rabbitmq相关配置
+rabbitmq:
+  host: localhost
+  port: 5672
+  username: admin
+  password: 123456
+
+##rabbitmq相关配置,暴露bus刷新配置的端点
+management:
+  endpoints: #暴露bus刷新配置的端点
+    web:
+      exposure:
+        include: 'bus-refresh'
 
 
